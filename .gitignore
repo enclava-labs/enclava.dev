@@ -100,3 +100,9 @@ Thumbs.db
 
 # Vite specific
 .vite/
+to-delete/
+
+# Tool / editor local state
+.claude/
+.history/
+.playwright-mcp/

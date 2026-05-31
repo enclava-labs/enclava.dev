@@ -1,0 +1,56 @@
+import { Switch, Route } from "wouter";
+import { queryClient } from "./lib/queryClient";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import Home from "@/pages/home";
+import Platform from "@/pages/platform";
+import UseCases from "@/pages/use-cases";
+import GetStarted from "@/pages/get-started";
+import ServicesPage from "@/pages/services";
+import BlogIndex from "@/pages/blog/index";
+import BlogPost from "@/pages/blog/post";
+import Privacy from "@/pages/privacy";
+import Terms from "@/pages/terms";
+import NotFound from "@/pages/not-found";
+import { useEffect } from "react";
+
+function PageWrapper({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (window.plausible) {
+      window.plausible('pageview');
+    }
+  }, []);
+  return <>{children}</>;
+}
+
+function Router() {
+  return (
+    <Switch>
+      <Route path="/" component={() => <PageWrapper><Home /></PageWrapper>} />
+      <Route path="/platform" component={() => <PageWrapper><Platform /></PageWrapper>} />
+      <Route path="/use-cases" component={() => <PageWrapper><UseCases /></PageWrapper>} />
+      <Route path="/services" component={() => <PageWrapper><ServicesPage /></PageWrapper>} />
+      <Route path="/get-started" component={() => <PageWrapper><GetStarted /></PageWrapper>} />
+      <Route path="/blog" component={() => <PageWrapper><BlogIndex /></PageWrapper>} />
+      <Route path="/blog/:slug" component={() => <PageWrapper><BlogPost /></PageWrapper>} />
+      <Route path="/privacy" component={() => <PageWrapper><Privacy /></PageWrapper>} />
+      <Route path="/terms" component={() => <PageWrapper><Terms /></PageWrapper>} />
+      <Route component={NotFound} />
+    </Switch>
+  );
+}
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Router />
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+}
+
+export default App;
