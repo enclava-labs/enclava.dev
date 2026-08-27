@@ -103,21 +103,15 @@
     "@vitejs/plugin-react": "^6.0.2",
     "autoprefixer": "^10.5.0",
     "drizzle-kit": "^0.31.10",
-    "esbuild": "^0.28.0",
-    "postcss": "^8.5.15",
+    "esbuild": "^0.28.1",
+    "postcss": "^8.5.23",
     "rollup": "^4.60.4",
     "tailwindcss": "^4.3.0",
     "tsx": "^4.22.3",
     "typescript": "6.0.3",
-    "vite": "^8.0.14"
+    "vite": "^8.0.16"
   },
   "optionalDependencies": {
     "bufferutil": "^4.1.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "esbuild@<=0.24.2": ">=0.25.0",
-      "qs@<6.14.1": ">=6.14.1"
-    }
   }
 }
