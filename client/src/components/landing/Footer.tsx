@@ -1,3 +1,5 @@
+import SocialLinks from "@/components/landing/SocialLinks";
+
 export default function Footer() {
   return (
     <footer className="bg-card border-t border-white/10 py-14">
@@ -12,6 +14,17 @@ export default function Footer() {
               confidential application — encrypted in use, verifiable by
               anyone, invisible to the cloud.
             </p>
+            <p className="text-muted-foreground text-sm mt-3">
+              A product of{" "}
+              <a
+                href="https://enclava-labs.com/"
+                className="text-white hover:text-primary transition-colors"
+              >
+                Enclava Labs
+              </a>
+              .
+            </p>
+            <SocialLinks className="mt-5" />
           </div>
 
           <div>
@@ -65,10 +78,18 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/enclava-labs"
+                  href="https://github.com/enclava-labs/"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://enclava.ai"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Enclava.ai
                 </a>
               </li>
               <li>
@@ -84,7 +105,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Enclava. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Enclava Labs. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="/privacy" className="hover:text-white transition-colors">
               Privacy Policy

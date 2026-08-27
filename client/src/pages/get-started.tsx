@@ -105,9 +105,9 @@ const paths = [
     icon: Terminal,
     eyebrow: "Path 01",
     title: "Deploy your first app",
-    body: "Get an account on the managed platform. Push a container, get a confidential application running on a TLS endpoint in minutes. The fastest way to see what Enclava actually does.",
+    body: "Request access to the hosted platform. Push a container, get a confidential application running on a TLS endpoint. The fastest way to see what Enclava actually does.",
     bullets: [
-      "Free trial credits, no card required",
+      "Invite-only beta, no card required",
       "OCI containers — bring any image",
       "TLS, custom domains, encrypted volumes included",
       "Public attestation per deploy",
@@ -119,10 +119,10 @@ const paths = [
     icon: Cloud,
     eyebrow: "Path 02",
     title: "Run the engine yourself",
-    body: "The deploy engine is open source. If you operate your own SEV-SNP or TDX-capable hardware (or you want to white-label), self-host the platform and skip our managed cloud entirely.",
+    body: "The deploy engine is open source. If you operate your own SEV-SNP-capable hardware (or you want to white-label), self-host the platform and skip our managed cloud entirely.",
     bullets: [
       "Open source, MIT-licensed engine",
-      "Runs on your own AMD SEV-SNP / Intel TDX clusters",
+      "Runs on your own AMD SEV-SNP clusters",
       "Brand it / resell it as your own product",
       "Documentation + community support",
     ],
@@ -138,7 +138,7 @@ const paths = [
         </Button>
       </a>
     ),
-    note: "Best when you already operate Kubernetes and SEV-SNP / TDX hardware.",
+    note: "Best when you already operate Kubernetes and SEV-SNP hardware.",
   },
 ];
 

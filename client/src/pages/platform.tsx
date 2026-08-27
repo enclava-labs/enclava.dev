@@ -29,7 +29,7 @@ const capabilities = [
   {
     icon: GitBranch,
     title: "Verifiable releases",
-    body: "Every deploy emits a public attestation pinning the exact image running inside the TEE (AMD SEV-SNP / Intel TDX). Customers, auditors, or you can verify it without trusting us.",
+    body: "Every deploy emits a public attestation pinning the exact image running inside the TEE (AMD SEV-SNP). Customers, auditors, or you can verify it without trusting us.",
   },
   {
     icon: Network,
@@ -78,8 +78,8 @@ export default function Platform() {
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl border-l-2 border-white/10 pl-6">
                 Enclava is a deployment platform that runs your containers
-                inside trusted execution environments (TEEs) on AMD SEV-SNP and
-                Intel TDX. You bring an image — we handle attestation,
+                inside trusted execution environments (TEEs) on AMD SEV-SNP.
+                You bring an image — we handle attestation,
                 encrypted storage, sealed secrets, TLS, domains, and the gnarly
                 orchestration underneath.
                 <span className="block mt-4 text-white">
@@ -130,7 +130,7 @@ export default function Platform() {
                 </pre>
                 <Link href="/get-started">
                   <Button className="rounded-none font-mono bg-primary text-background hover:bg-primary/90 h-12 px-6">
-                    Deploy your first app <ArrowRight className="ml-2 w-4 h-4" />
+                    Request access <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </Link>
               </motion.div>
@@ -151,14 +151,14 @@ export default function Platform() {
                 <p className="text-muted-foreground leading-relaxed mb-6">
                   The orchestration layer that makes confidential deploys
                   work — manifest generation, attestation, encrypted storage,
-                  ingress — is open-source. Run it on your own SEV-SNP / TDX
+                  ingress — is open-source. Run it on your own SEV-SNP
                   hardware, brand it, resell it. Every confidential cloud
                   needs this layer; you don't have to build it.
                 </p>
                 <ul className="space-y-3 mb-6 border-l border-white/10 pl-6 text-sm text-muted-foreground">
                   <li>
                     <span className="text-white block mb-0.5">Bring your own hardware</span>
-                    Run on any SEV-SNP or TDX-capable cluster.
+                    Run on AMD SEV-SNP-capable clusters (Intel TDX planned).
                   </li>
                   <li>
                     <span className="text-white block mb-0.5">White-label</span>
@@ -170,7 +170,7 @@ export default function Platform() {
                   </li>
                 </ul>
                 <a
-                  href="https://github.com/enclava-labs"
+                  href="https://github.com/enclava-labs/cap"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

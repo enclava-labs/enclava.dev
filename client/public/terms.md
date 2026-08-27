@@ -8,7 +8,7 @@ By accessing or using Enclava's services, you agree to be bound by these Terms o
 
 ## 2. Description of Service
 
-Enclava provides a confidential AI platform that enables secure processing of sensitive data using Trusted Execution Environments (TEEs). Our services include confidential inference APIs, knowledge base management, agent frameworks, and document processing capabilities.
+Enclava provides a confidential applications platform that runs container workloads in Trusted Execution Environments (TEEs). Our services include hosted deployment, attestation and verification, encrypted storage, and related operator tooling.
 
 ## 3. Account Registration
 

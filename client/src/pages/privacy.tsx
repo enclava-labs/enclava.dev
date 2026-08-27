@@ -20,7 +20,7 @@ export default function Privacy() {
                 <section>
                   <h2 className="text-3xl font-display font-bold text-white mb-4">1. Introduction</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    Enclava ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our confidential AI platform and services.
+                    Enclava ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use the enclava.dev confidential applications platform and related services.
                   </p>
                 </section>
 
@@ -40,7 +40,7 @@ export default function Privacy() {
                 <section>
                   <h2 className="text-3xl font-display font-bold text-white mb-4">3. Data Processing in Trusted Execution Environments</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    Your data processed through Enclava's confidential computing platform is encrypted in use, at rest, and in transit. We cannot access your data within the trusted execution environment (TEE) — backed by AMD SEV-SNP and Intel TDX — and this is a core feature of our architecture.
+                    Your data processed through Enclava's confidential computing platform is encrypted in use, at rest, and in transit. We cannot access your data within the trusted execution environment (TEE) — currently AMD SEV-SNP — and this is a core feature of our architecture.
                   </p>
                 </section>
 

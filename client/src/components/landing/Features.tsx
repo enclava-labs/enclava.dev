@@ -19,7 +19,7 @@ const steps = [
   {
     idx: "02",
     title: "We verify & provision",
-    body: "The platform pulls your image, verifies its signature, generates the orchestration to run it inside a TEE on AMD SEV-SNP or Intel TDX, and provisions encrypted storage with keys only the TEE holds.",
+    body: "The platform pulls your image, verifies its signature, generates the orchestration to run it inside a TEE on AMD SEV-SNP, and provisions encrypted storage with keys only the TEE holds.",
     code: (
       <>
         <span className="text-muted-foreground">→ resolving digest…              </span><span className="text-secondary">ok</span>
@@ -103,7 +103,7 @@ export default function Features() {
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
             You give us a container. We give you a confidential application —
-            running inside a hardware TEE (AMD SEV-SNP / Intel TDX), reachable
+            running inside a hardware TEE (AMD SEV-SNP), reachable
             on a TLS endpoint, with cryptographic proof of what's inside. No
             infrastructure expertise required.
           </p>

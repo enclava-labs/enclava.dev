@@ -4,7 +4,7 @@ import { Check, X } from "lucide-react";
 const trusted = [
   "Your application",
   "Encrypted volumes & secrets",
-  "TEE — AMD SEV-SNP / Intel TDX",
+  "TEE — AMD SEV-SNP",
 ];
 const untrusted = [
   "Host OS / hypervisor",

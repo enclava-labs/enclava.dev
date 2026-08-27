@@ -27,7 +27,7 @@ export default function Terms() {
                 <section>
                   <h2 className="text-3xl font-display font-bold text-white mb-4">2. Description of Service</h2>
                   <p className="text-muted-foreground leading-relaxed">
-                    Enclava provides a confidential AI platform that enables secure processing of sensitive data using Trusted Execution Environments (TEEs). Our services include confidential inference APIs, knowledge base management, agent frameworks, and document processing capabilities.
+                    Enclava provides a confidential applications platform that runs container workloads in Trusted Execution Environments (TEEs). Our services include hosted deployment, attestation and verification, encrypted storage, and related operator tooling.
                   </p>
                 </section>
 

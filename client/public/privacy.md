@@ -4,7 +4,7 @@ Last updated: January 16, 2026
 
 ## 1. Introduction
 
-Enclava ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our confidential AI platform and services.
+Enclava ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use the enclava.dev confidential applications platform and related services.
 
 ## 2. Information We Collect
 
@@ -17,7 +17,7 @@ We collect information that you provide directly to us, including:
 
 ## 3. Data Processing in Secure Enclaves
 
-Your data processed through Enclava's confidential computing platform is encrypted in use, at rest, and in transit. We cannot access your data within the TEE - this is a core feature of our confidential computing architecture.
+Your data processed through Enclava's confidential computing platform is encrypted in use, at rest, and in transit. We cannot access your data within the trusted execution environment (TEE) — currently AMD SEV-SNP — and this is a core feature of our architecture.
 
 ## 4. How We Use Your Information
 

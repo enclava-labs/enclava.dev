@@ -1,49 +1,21 @@
-# Get Started with Enclava
+# Get Started with Enclava.dev
 
-> Choose the deployment model that fits your team and requirements.
+> Two paths: request hosted access, or run the open-source engine yourself.
 
-## Self-Hosted
+## Hosted platform (invite beta)
 
-**"I'll run it myself"**
+Request access to the managed confidential applications platform. Push a container, get a confidential application. No card required; we onboard teams in waves.
 
-Deploy on your own infrastructure with full control. Open source, community supported.
+[Request access](https://enclava.dev/get-started)
 
-- Full control over your environment
-- Your infrastructure, your rules
-- Community support & documentation
+## Self-host the engine
 
-[View Documentation](https://docs.enclava.dev)
+The deploy engine ([CAP](https://github.com/enclava-labs/cap)) is open source (MIT). Run it on your own AMD SEV-SNP hardware if you already operate Kubernetes.
 
-## Hosted (Coming Q2 2026)
+[Documentation](https://docs.enclava.dev) · [GitHub](https://github.com/enclava-labs/cap)
 
-**"Host it for me"**
+## White glove
 
-Enclava as a service. We run the infrastructure, you focus on building.
+Bring an existing app. We move it onto confidential infrastructure with you.
 
-- No infrastructure to manage
-- Self-serve checkout
-- Usage-based pricing
-
-[Join Waitlist](https://enclava.dev/get-started)
-
-## White Glove
-
-**"Build it with me"**
-
-We work backwards from your needs to design and deploy the optimal solution for your organization.
-
-- Custom architecture design
-- End-to-end implementation
-- Ongoing partnership & support
-
-[Schedule a Call](https://cal.com/aljaz/enclava)
-
-## Need Custom Integrations?
-
-Regardless of how you deploy, our engineering team works directly with you to build the integrations and tools you need. We're here to help you unlock productivity and automation across your organization.
-
-- Data connectors & ETL pipelines
-- Custom AI agents & workflows
-- Legacy system integration
-
-[Talk to Engineering](https://cal.com/aljaz/enclava)
+[Schedule a call](https://cal.com/aljaz/enclava)

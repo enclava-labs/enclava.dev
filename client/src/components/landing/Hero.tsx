@@ -97,7 +97,7 @@ export default function Hero() {
               className="text-xl text-muted-foreground leading-relaxed max-w-2xl border-l-2 border-white/10 pl-6"
             >
               Deploy your containers and we run them inside trusted execution
-              environments (TEEs) on AMD SEV-SNP and Intel TDX. Your code, your
+              environments (TEEs) on AMD SEV-SNP. Your code, your
               data, your secrets — invisible to us, invisible to the cloud,
               verifiable by anyone.
               <span className="block mt-4 text-white">
@@ -116,7 +116,7 @@ export default function Hero() {
                   size="lg"
                   className="h-14 px-8 rounded-none text-base bg-primary text-background hover:bg-primary/90 transition-all font-mono"
                 >
-                  Deploy your first app <ArrowRight className="ml-2 w-4 h-4" />
+                  Request access <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
               <a href="#how-it-works">
@@ -150,7 +150,7 @@ export default function Hero() {
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-secondary shadow-[0_0_12px_hsl(160_84%_39%)]"></span>
-                AMD SEV-SNP · Intel TDX
+                AMD SEV-SNP
               </span>
             </motion.div>
           </div>
