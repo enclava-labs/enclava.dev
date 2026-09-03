@@ -1,165 +1,221 @@
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-const steps = [
+type Token = { t: "cmd" | "dim" | "ok" | "text"; text: string };
+
+const STEPS = [
   {
-    idx: "01",
+    num: "STEP 01",
     title: "Describe your app",
     body: "One declarative file: image, resources, domains, persistent volumes. Same mental model you already have for Docker Compose or any modern PaaS.",
-    code: (
-      <>
-        <span className="text-muted-foreground"># enclava.toml</span>
-        {"\n"}name = "myapp"
-        {"\n"}image = <span className="text-primary">"ghcr.io/me/app:latest"</span>
-        {"\n"}resources = {"{"} cpu = 4, memory = <span className="text-primary">"8Gi"</span> {"}"}
-        {"\n"}volumes.data = <span className="text-primary">"/var/lib/app"</span>
-        {"\n"}domain = <span className="text-primary">"app.acme.com"</span>
-      </>
-    ),
+    pills: null as string[] | null,
+    pane: [
+      [{ t: "cmd", text: "$ " }, { t: "text", text: "cat enclava.toml" }],
+      [{ t: "text", text: 'name = ' }, { t: "ok", text: '"myapp"' }],
+      [{ t: "text", text: "image = " }, { t: "ok", text: '"ghcr.io/me/app:latest"' }],
+      [{ t: "text", text: "resources = { cpu = 4, memory = " }, { t: "ok", text: '"8Gi"' }, { t: "text", text: " }" }],
+      [{ t: "text", text: "volumes.data = " }, { t: "ok", text: '"/var/lib/app"' }],
+      [{ t: "text", text: "domain = " }, { t: "ok", text: '"app.acme.com"' }],
+    ] as Token[][],
   },
   {
-    idx: "02",
+    num: "STEP 02",
     title: "We verify & provision",
     body: "The platform pulls your image, verifies its signature, generates the orchestration to run it inside a TEE on AMD SEV-SNP, and provisions encrypted storage with keys only the TEE holds.",
-    code: (
-      <>
-        <span className="text-muted-foreground">→ resolving digest…              </span><span className="text-secondary">ok</span>
-        {"\n"}<span className="text-muted-foreground">→ verifying signature…           </span><span className="text-secondary">ok</span>
-        {"\n"}<span className="text-muted-foreground">→ generating manifests…          </span><span className="text-secondary">ok</span>
-        {"\n"}<span className="text-muted-foreground">→ provisioning encrypted volume </span><span className="text-secondary">ok</span>
-        {"\n"}<span className="text-muted-foreground">→ allocating TEE (SEV-SNP)…     </span><span className="text-secondary">ok</span>
-      </>
-    ),
     pills: ["signed image", "encrypted volume", "isolated network"],
+    pane: [
+      [{ t: "cmd", text: "$ " }, { t: "text", text: "enclava deploy myapp" }],
+      [{ t: "dim", text: "→ resolving image digest…        " }, { t: "ok", text: "ok" }],
+      [{ t: "dim", text: "→ verifying signature…           " }, { t: "ok", text: "ok" }],
+      [{ t: "dim", text: "→ generating manifests…          " }, { t: "ok", text: "ok" }],
+      [{ t: "dim", text: "→ provisioning encrypted volume  " }, { t: "ok", text: "ok" }],
+      [{ t: "dim", text: "→ allocating TEE (SEV-SNP)…     " }, { t: "ok", text: "ok" }],
+    ] as Token[][],
   },
   {
-    idx: "03",
+    num: "STEP 03",
     title: "Your app boots inside a TEE",
     body: "The container runs in a hardware-isolated trusted execution environment where memory is encrypted at runtime. Even with full root on the host, the cloud operator cannot read your process memory, your filesystem, or your traffic.",
-    code: (
-      <>
-        <span className="text-primary">▸</span> TEE attested
-        {"\n"}<span className="text-primary">▸</span> volumes unlocked
-        {"\n"}<span className="text-primary">▸</span> tls terminated <span className="text-muted-foreground">inside</span> TEE
-        {"\n"}<span className="text-primary">▸</span> https://myapp.enclava.dev  <span className="text-secondary">live</span>
-      </>
-    ),
+    pills: null,
+    pane: [
+      [{ t: "cmd", text: "▸ " }, { t: "text", text: "TEE attested" }],
+      [{ t: "cmd", text: "▸ " }, { t: "text", text: "volumes unlocked" }],
+      [{ t: "cmd", text: "▸ " }, { t: "text", text: "tls terminated " }, { t: "dim", text: "inside" }, { t: "text", text: " TEE" }],
+      [{ t: "cmd", text: "▸ " }, { t: "text", text: "https://myapp.enclava.dev  " }, { t: "ok", text: "live" }],
+      [{ t: "dim", text: "" }],
+      [{ t: "dim", text: "memory: encrypted in use" }],
+      [{ t: "dim", text: "host visibility: none" }],
+    ] as Token[][],
   },
   {
-    idx: "04",
-    title: "Deliver secrets directly into the TEE",
+    num: "STEP 04",
+    title: "Secrets flow directly into the TEE",
     body: "API keys, DB credentials, signing keys — encrypted on your laptop, opened only inside the running TEE. They never touch our control plane in plaintext.",
-    code: (
-      <>
-        <span className="text-primary">$</span> enclava config set myapp \
-        {"\n"}    OPENAI_KEY=sk-… \
-        {"\n"}    DB_URL=postgres://…
-        {"\n"}
-        {"\n"}<span className="text-muted-foreground">→ wrapped to TEE key…       </span><span className="text-secondary">ok</span>
-        {"\n"}<span className="text-muted-foreground">→ delivered                  </span><span className="text-secondary">✓</span>
-      </>
-    ),
+    pills: ["sealed on your machine", "opened in-enclave only"],
+    pane: [
+      [{ t: "cmd", text: "$ " }, { t: "text", text: "enclava config set myapp \\" }],
+      [{ t: "text", text: "    OPENAI_KEY=sk-… \\" }],
+      [{ t: "text", text: "    DB_URL=postgres://…" }],
+      [{ t: "dim", text: "" }],
+      [{ t: "dim", text: "→ wrapped to TEE key…       " }, { t: "ok", text: "ok" }],
+      [{ t: "dim", text: "→ delivered                  " }, { t: "ok", text: "✓" }],
+      [{ t: "dim", text: "" }],
+      [{ t: "dim", text: "plaintext exposure: 0 bytes" }],
+    ] as Token[][],
   },
 ];
 
-export default function Features() {
-  return (
-    <section
-      id="how-it-works"
-      className="py-32 relative overflow-hidden"
-    >
-      {/* Atmosphere */}
-      <div className="absolute inset-0 z-0 pointer-events-none select-none">
-        <div
-          className="absolute inset-0 opacity-[0.10] mix-blend-screen"
-          style={{
-            backgroundImage:
-              "radial-gradient(hsla(190,90%,55%,0.6) 1px, transparent 1.5px)",
-            backgroundSize: "32px 32px",
-            maskImage:
-              "linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)",
-          }}
-        ></div>
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(800px circle at 15% 20%, hsla(190, 90%, 45%, 0.10), transparent 60%), radial-gradient(700px circle at 90% 75%, hsla(160, 84%, 45%, 0.08), transparent 65%)",
-          }}
-        ></div>
-      </div>
+function tokenClass(t: Token["t"]) {
+  switch (t) {
+    case "cmd": return "text-primary";
+    case "dim": return "text-muted-foreground/70";
+    case "ok": return "text-secondary";
+    default: return "text-white";
+  }
+}
 
-      <div className="container mx-auto px-6 relative z-10">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-24">
-          <span className="text-primary font-mono text-xs tracking-widest uppercase mb-4 block">
+export default function Features() {
+  const [active, setActive] = useState(0);
+  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const idx = Number((e.target as HTMLElement).dataset.pane);
+            if (!Number.isNaN(idx)) setActive(idx);
+          }
+        });
+      },
+      { rootMargin: "-35% 0px -55% 0px" }
+    );
+    stepRefs.current.forEach((el) => el && io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <section id="how-it-works" className="py-24 md:py-32 relative scroll-mt-24">
+      <div className="container mx-auto px-6">
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl mb-14 md:mb-16"
+        >
+          <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-primary mb-4">
+            <span className="w-[22px] h-px bg-primary/60" />
             How it works
           </span>
-          <h2 className="text-4xl md:text-6xl font-display font-medium text-white mb-6 leading-[1.0] tracking-tight">
-            From <span className="font-mono text-primary text-[0.85em]">docker push</span>
+          <h2 className="text-4xl md:text-6xl font-display font-bold text-white leading-[1.05] tracking-tight">
+            From{" "}
+            <span className="font-mono text-[0.82em] text-primary">docker push</span>
             <br />
-            <span className="text-muted-foreground">to confidential, in four steps.</span>
+            <span className="text-muted-foreground/70">to confidential, in four steps.</span>
           </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed">
+          <p className="mt-5 text-lg text-muted-foreground leading-relaxed">
             You give us a container. We give you a confidential application —
-            running inside a hardware TEE (AMD SEV-SNP), reachable
-            on a TLS endpoint, with cryptographic proof of what's inside. No
-            infrastructure expertise required.
+            reachable on a TLS endpoint, with cryptographic proof of what's
+            inside. Scroll through a deploy.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Steps — vertical timeline, no outer box */}
-        <div className="relative">
-          {/* Connector spine */}
-          <div className="absolute left-[14px] lg:left-[26px] top-2 bottom-2 w-px bg-gradient-to-b from-primary/40 via-white/10 to-transparent"></div>
-          <div className="space-y-6">
-            {steps.map((step, i) => (
-              <motion.div
-                key={step.idx}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
-                className="relative grid lg:grid-cols-[60px_1fr_1.1fr] gap-6 lg:gap-12 pl-12 lg:pl-16 pr-2 lg:pr-4 py-6"
+        {/* Steps + sticky terminal */}
+        <div className="grid lg:grid-cols-[1fr_1.05fr] gap-11 lg:gap-[72px] items-start">
+          {/* Steps */}
+          <div>
+            {STEPS.map((step, i) => (
+              <div
+                key={step.num}
+                ref={(el) => {
+                  stepRefs.current[i] = el;
+                }}
+                data-pane={i}
+                className={`py-7 md:py-8 border-t border-white/[0.07] transition-opacity duration-500 ${
+                  i === 0 ? "border-t-0 pt-1" : ""
+                } ${active === i ? "opacity-100" : "opacity-40"}`}
               >
-                {/* Node + index */}
-                <div className="absolute left-0 top-7 flex items-center gap-3 lg:contents">
-                  <span className="lg:absolute lg:left-[18px] lg:top-1 w-4 h-4 rounded-full bg-background border border-primary/60 shadow-[0_0_18px_hsla(190,90%,45%,0.45)] grid place-items-center">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                  </span>
-                </div>
-                <div className="hidden lg:block font-mono text-xs text-primary/90 tracking-[0.25em] pt-1">
-                  {step.idx}
-                </div>
-                <div>
-                  <span className="lg:hidden font-mono text-[10px] text-primary/90 tracking-[0.25em] block mb-2">
-                    {step.idx}
-                  </span>
-                  <h3 className="text-2xl md:text-3xl font-display font-medium text-white mb-3 leading-tight">
-                    {step.title}
-                  </h3>
-                  <p className="text-muted-foreground text-[15px] leading-relaxed max-w-md">
-                    {step.body}
-                  </p>
-                  {step.pills && (
-                    <div className="flex flex-wrap gap-2 mt-5">
-                      {step.pills.map((p) => (
-                        <span
-                          key={p}
-                          className="px-3 py-1 border border-white/10 rounded-full font-mono text-[10px] text-muted-foreground bg-white/[0.02]"
-                        >
-                          {p}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                <div className="bg-card/60 backdrop-blur-sm border border-white/[0.06] p-5 font-mono text-[12.5px] leading-[1.7] text-white whitespace-pre-wrap rounded-md shadow-[0_10px_40px_rgba(0,0,0,0.35)]">
-                  {step.code}
-                </div>
-              </motion.div>
+                <span className="block font-mono text-[11px] tracking-[0.22em] text-primary mb-4">
+                  {step.num}
+                </span>
+                <h3 className="text-2xl md:text-[32px] font-display font-bold text-white mb-3.5 tracking-tight">
+                  {step.title}
+                </h3>
+                <p className="text-[15px] md:text-base text-muted-foreground leading-[1.7] max-w-md">
+                  {step.body}
+                </p>
+                {step.pills && (
+                  <div className="flex flex-wrap gap-2 mt-5">
+                    {step.pills.map((p) => (
+                      <span
+                        key={p}
+                        className="px-3 py-[5px] rounded-full border border-primary/35 bg-card/50 font-mono text-[10.5px] text-muted-foreground"
+                      >
+                        {p}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
+          </div>
+
+          {/* Sticky terminal — pins beside steps on desktop, under the nav on mobile */}
+          <div className="sticky top-[86px] lg:top-[110px] z-30 order-first lg:order-none mb-4 lg:mb-0">
+            <div className="relative rounded-[18px] bg-[hsl(223,33%,7%)] border border-border shadow-[0_40px_90px_-20px_hsla(223,45%,3%,0.8),0_0_60px_-30px_hsla(190,90%,50%,0.35)] overflow-hidden">
+              {/* live badge */}
+              <div className="absolute -top-[15px] right-5 z-10 inline-flex items-center gap-2 px-[13px] py-1.5 rounded-full font-mono text-[10.5px] uppercase tracking-[0.16em] text-muted-foreground bg-card/95 border border-primary/30 shadow-lg backdrop-blur">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_10px_hsl(190,90%,45%)] animate-pulse" />
+                live deploy
+              </div>
+
+              {/* window bar + progress dots */}
+              <div className="flex items-center gap-2 px-[18px] py-3 border-b border-border bg-background/50">
+                <span className="w-[11px] h-[11px] rounded-full bg-muted" />
+                <span className="w-[11px] h-[11px] rounded-full bg-muted" />
+                <span className="w-[11px] h-[11px] rounded-full bg-muted" />
+                <span className="ml-3 font-mono text-xs text-muted-foreground/60">
+                  enclava cli · ~/my-app
+                </span>
+                <span className="ml-auto flex gap-1.5">
+                  {STEPS.map((_, i) => (
+                    <span
+                      key={i}
+                      className={`w-[7px] h-[7px] rounded-full transition-all duration-300 ${
+                        active === i
+                          ? "bg-primary shadow-[0_0_8px_hsla(190,90%,50%,0.8)]"
+                          : "bg-muted/50"
+                      }`}
+                    />
+                  ))}
+                </span>
+              </div>
+
+              {/* panes */}
+              <div className="p-5 md:px-8 md:py-7 font-mono text-[11px] md:text-[13.5px] leading-[1.9] min-h-[190px] md:min-h-[320px] overflow-x-auto">
+                {STEPS.map((step, i) => (
+                  <div key={i} className={active === i ? "block" : "hidden"}>
+                    {step.pane.map((tokens, li) => (
+                      <span
+                        key={li}
+                        className={`block whitespace-pre opacity-0 ${
+                          active === i ? "animate-line-in" : ""
+                        }`}
+                        style={{ animationDelay: `${0.05 + li * 0.09}s` }}
+                      >
+                        {tokens.map((tok, ti) => (
+                          <span key={ti} className={tokenClass(tok.t)}>
+                            {tok.text || "\u00A0"}
+                          </span>
+                        ))}
+                      </span>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

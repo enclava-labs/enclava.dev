@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENCLAVA — Design Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: hsl(223 32% 9%);
+    --card: hsl(222 30% 13%);
+    --fg: hsl(210 20% 98%);
+    --muted: hsl(215 15% 74%);
+    --cyan: hsl(190 90% 50%);
+    --line: hsl(221 20% 20%);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--fg); font-family: "Inter", sans-serif; -webkit-font-smoothing: antialiased; min-height: 100vh; display: grid; place-items: center; padding: 60px 24px; }
+  .wrap { max-width: 720px; width: 100%; }
+  h1 { font-family: "Plus Jakarta Sans", sans-serif; font-size: clamp(30px, 4vw, 42px); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 10px; }
+  h1 span { color: var(--cyan); }
+  .sub { color: var(--muted); font-size: 15px; margin-bottom: 36px; line-height: 1.6; }
+  a.card { display: grid; grid-template-columns: 1fr auto; gap: 8px 24px; align-items: center; padding: 26px 30px; border-radius: 18px; background: var(--card); border: 1px solid var(--line); text-decoration: none; color: inherit; transition: all .3s; }
+  a.card:hover { transform: translateY(-3px); border-color: var(--cyan); box-shadow: 0 20px 50px -24px hsla(190, 90%, 45%, 0.4); }
+  .tag { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--cyan); margin-bottom: 8px; display: block; }
+  .card h2 { font-family: "Plus Jakarta Sans", sans-serif; font-size: 21px; font-weight: 700; }
+  .card p { color: var(--muted); font-size: 14px; line-height: 1.6; grid-column: 1 / -1; }
+  .arrow { font-family: "JetBrains Mono", monospace; color: hsl(160 84% 45%); font-size: 15px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>ENCLAVA<span>.</span> — design reference</h1>
+    <p class="sub">The approved landing design (implemented in <code style="font-family:'JetBrains Mono',monospace; color:var(--cyan)">client/src/components/landing/</code>). Kept here as the source-of-truth mockup.</p>
+    <a class="card" href="proposal-1b-sentry-dark-scroll.html">
+      <div>
+        <span class="tag">Implemented</span>
+        <h2>Sentry Dark — Scroll Flow</h2>
+      </div>
+      <span class="arrow">open →</span>
+      <p>Centered hero, use-case marquee, scroll-driven sticky terminal with progress dots, platform bento, trust band, stats + quote, oversized CTA. All-dark navy + cyan/teal.</p>
+    </a>
+  </div>
+</body>
+</html>

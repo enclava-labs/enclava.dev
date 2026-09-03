@@ -1,200 +1,124 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { useRef } from "react";
-import heroBg from "/images/abstract_secure_confidential_computing_visualization.png";
+import { ArrowDown, ArrowRight } from "lucide-react";
+
+const META = ["Encrypted in use", "Encrypted at rest", "Attestation verifiable", "AMD SEV-SNP"];
 
 export default function Hero() {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.15]);
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0.2]);
-
   return (
-    <section
-      ref={ref}
-      className="relative min-h-screen flex items-center pt-20 overflow-hidden"
-    >
-      {/* Background — atmosphere layer */}
-      <div className="absolute inset-0 z-0 select-none pointer-events-none">
-        <div className="absolute inset-0 bg-background"></div>
-
-        {/* Hero image: bigger, brighter, with a slow scroll parallax */}
-        <motion.div
-          style={{ y: bgY, scale: bgScale, opacity: bgOpacity }}
-          className="absolute inset-0"
-        >
-          <img
-            src={heroBg}
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover opacity-[0.55] mix-blend-screen"
-          />
-        </motion.div>
-
-        {/* Faint engineered grid overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.18] mix-blend-overlay"
-          style={{
-            backgroundImage:
-              "linear-gradient(hsla(190,90%,55%,0.4) 1px, transparent 1px), linear-gradient(90deg, hsla(190,90%,55%,0.4) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
-            maskImage:
-              "radial-gradient(ellipse 70% 60% at 70% 35%, black 0%, transparent 75%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 70% 60% at 70% 35%, black 0%, transparent 75%)",
-          }}
-        ></div>
-
-        {/* Volumetric light blooms */}
+    <section className="relative pt-[150px] md:pt-[200px] pb-16 md:pb-24 text-center overflow-hidden">
+      {/* Atmosphere: cyan/teal washes + dot grid */}
+      <div className="absolute inset-0 z-0 pointer-events-none select-none">
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(900px circle at 78% 32%, hsla(190, 95%, 55%, 0.22), transparent 60%), radial-gradient(700px circle at 8% 85%, hsla(160, 84%, 45%, 0.14), transparent 65%), radial-gradient(500px circle at 50% 110%, hsla(190, 90%, 45%, 0.10), transparent 70%)",
+              "radial-gradient(640px 420px at 50% -6%, hsla(190, 90%, 50%, 0.16), transparent 70%), radial-gradient(560px 400px at 82% 18%, hsla(160, 84%, 45%, 0.10), transparent 70%)",
           }}
-        ></div>
-
-        {/* Edge falloff to seat the scene into the page */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-background"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background/30"></div>
+        />
+        <div
+          className="absolute inset-0 opacity-50"
+          style={{
+            backgroundImage:
+              "radial-gradient(hsla(190, 70%, 60%, 0.28) 1px, transparent 1.4px)",
+            backgroundSize: "26px 26px",
+            maskImage:
+              "radial-gradient(ellipse 62% 46% at 50% 8%, black, transparent 72%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 62% 46% at 50% 8%, black, transparent 72%)",
+          }}
+        />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-16 items-center">
-          {/* Left: copy */}
-          <div className="lg:col-span-7 space-y-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="flex items-center space-x-3"
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-[clamp(2.8rem,8.2vw,6.5rem)] font-display font-bold tracking-tighter leading-none text-white mb-7"
+        >
+          Ship any app.
+          <br />
+          <span className="gradient-text">Confidentially.</span>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10"
+        >
+          Push a container. We run it inside a hardware-isolated trusted
+          execution environment on AMD SEV-SNP. Your code, your data, your
+          secrets — invisible to us, invisible to the cloud, verifiable by
+          anyone.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex flex-col sm:flex-row gap-3.5 justify-center sm:max-w-md mx-auto mb-8"
+        >
+          <Link href="/get-started" className="flex-1 sm:flex-none">
+            <Button
+              size="lg"
+              className="w-full sm:w-auto h-14 px-8 rounded-full text-[15px] font-mono bg-primary text-primary-foreground border-none hover:bg-primary/90 hover:shadow-[0_0_28px_hsla(190,90%,50%,0.45)] hover:-translate-y-0.5 transition-all"
             >
-              <div className="h-px w-8 bg-primary"></div>
-              <span className="text-primary font-mono text-xs tracking-widest uppercase">
-                Confidential Applications Platform
-              </span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-6xl md:text-8xl font-display font-medium tracking-tighter leading-[0.9] text-white"
+              Request access <ArrowRight className="ml-1" />
+            </Button>
+          </Link>
+          <a href="#how-it-works" className="flex-1 sm:flex-none">
+            <Button
+              size="lg"
+              variant="outline"
+              className="w-full sm:w-auto h-14 px-8 rounded-full text-[15px] font-mono border-white/15 bg-card/40 text-white hover:border-primary hover:bg-primary/10 transition-all"
             >
-              Ship any app. <br />
-              <span className="text-muted-foreground">Confidentially.</span>
-            </motion.h1>
+              See how it works
+            </Button>
+          </a>
+        </motion.div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-muted-foreground leading-relaxed max-w-2xl border-l-2 border-white/10 pl-6"
-            >
-              Deploy your containers and we run them inside trusted execution
-              environments (TEEs) on AMD SEV-SNP. Your code, your
-              data, your secrets — invisible to us, invisible to the cloud,
-              verifiable by anyone.
-              <span className="block mt-4 text-white">
-                Push a container. Get a confidential application.
-              </span>
-            </motion.p>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.35 }}
+          className="flex flex-wrap justify-center gap-x-7 gap-y-3 font-mono text-xs text-muted-foreground/80 mb-10 md:mb-14"
+        >
+          {META.map((m) => (
+            <span key={m} className="inline-flex items-center gap-2">
+              <span className="w-[5px] h-[5px] rounded-full bg-secondary shadow-[0_0_8px_hsl(160_84%_39%)]" />
+              {m}
+            </span>
+          ))}
+        </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap gap-4"
-            >
-              <Link href="/get-started">
-                <Button
-                  size="lg"
-                  className="h-14 px-8 rounded-none text-base bg-primary text-background hover:bg-primary/90 transition-all font-mono"
-                >
-                  Request access <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-              <a href="#how-it-works">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="h-14 px-8 rounded-none text-base border-white/15 text-white hover:bg-white/5 font-mono"
-                >
-                  See how it works
-                </Button>
-              </a>
-            </motion.div>
+        {/* One-line command hint */}
+        <motion.a
+          href="#how-it-works"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.45 }}
+          className="inline-flex items-center gap-3 font-mono text-sm text-muted-foreground bg-card border border-border rounded-xl px-6 py-3.5 shadow-[0_16px_40px_-18px_hsla(223,45%,4%,0.7)] hover:border-primary/50 hover:-translate-y-0.5 transition-all"
+        >
+          <span>
+            <span className="text-primary">$</span> enclava deploy myapp
+          </span>
+          <span className="inline-block w-2 h-[17px] bg-primary shadow-[0_0_8px_hsla(190,90%,50%,0.7)] animate-blink" />
+        </motion.a>
 
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.45 }}
-              className="flex flex-wrap gap-x-8 gap-y-3 pt-6 font-mono text-xs text-muted-foreground"
-            >
-              <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-secondary shadow-[0_0_12px_hsl(160_84%_39%)]"></span>
-                Encrypted in use
-              </span>
-              <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-secondary shadow-[0_0_12px_hsl(160_84%_39%)]"></span>
-                Encrypted at rest
-              </span>
-              <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-secondary shadow-[0_0_12px_hsl(160_84%_39%)]"></span>
-                Attestation verifiable
-              </span>
-              <span className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-secondary shadow-[0_0_12px_hsl(160_84%_39%)]"></span>
-                AMD SEV-SNP
-              </span>
-            </motion.div>
-          </div>
-
-          {/* Right: terminal demo */}
-          <div className="lg:col-span-5 relative hidden lg:block">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96, rotateY: -8 }}
-              animate={{ opacity: 1, scale: 1, rotateY: -4 }}
-              transition={{ duration: 1, delay: 0.4 }}
-              style={{ transformPerspective: 1200 }}
-              className="relative"
-            >
-              <div className="absolute -top-8 left-0 inline-flex gap-2 items-center px-3 py-1.5 border border-border rounded-full font-mono text-[10px] uppercase tracking-widest text-muted-foreground bg-background/80">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_12px_hsl(190_90%_45%)] animate-pulse"></span>
-                live deploy
-              </div>
-              <div className="bg-card border border-border shadow-[0_30px_80px_rgba(0,0,0,0.5)] overflow-hidden">
-                <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background/40">
-                  <span className="w-2.5 h-2.5 rounded-full bg-muted"></span>
-                  <span className="w-2.5 h-2.5 rounded-full bg-muted"></span>
-                  <span className="w-2.5 h-2.5 rounded-full bg-muted"></span>
-                  <span className="ml-3 font-mono text-xs text-muted-foreground">
-                    ~/my-app · enclava cli
-                  </span>
-                </div>
-                <pre className="p-6 font-mono text-[13px] leading-[1.75] whitespace-pre-wrap text-white">
-<span className="text-primary">$</span> enclava deploy myapp ghcr.io/me/app:latest
-<span className="text-muted-foreground">→ resolving image digest…           </span><span className="text-secondary">ok</span>
-<span className="text-muted-foreground">→ verifying signature…              </span><span className="text-secondary">ok</span>
-<span className="text-muted-foreground">→ provisioning encrypted volume…    </span><span className="text-secondary">ok</span>
-<span className="text-muted-foreground">→ launching TEE (SEV-SNP)…          </span><span className="text-secondary">ok</span>
-<span className="text-muted-foreground">→ attestation verified              </span><span className="text-secondary">✓</span>
-
-<span className="text-primary">▸</span> https://myapp.enclava.dev
-<span className="text-muted-foreground">  encrypted in use · 4 vCPU · 8 GiB</span>
-
-<span className="text-primary">$</span> enclava config set myapp DB_URL=…
-<span className="text-muted-foreground">  secret delivered direct-to-enclave</span>
-                </pre>
-              </div>
-            </motion.div>
-          </div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.6 }}
+          className="mt-10 md:mt-12 flex flex-col items-center gap-2.5"
+        >
+          <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-muted-foreground/60">
+            scroll to deploy
+          </span>
+          <ArrowDown className="w-4 h-4 text-primary animate-bob" />
+        </motion.div>
       </div>
     </section>
   );
