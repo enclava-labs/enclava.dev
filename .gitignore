@@ -106,3 +106,5 @@ to-delete/
 .claude/
 .history/
 .playwright-mcp/
+
+.planning/debug/
