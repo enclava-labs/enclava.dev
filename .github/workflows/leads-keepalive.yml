@@ -1,0 +1,58 @@
+name: Leads keep-alive + canary
+
+# Supabase free-tier projects pause after ~7 days of inactivity.
+# This daily canary keeps the project awake AND verifies the exact
+# write path visitors use (RLS insert policy included).
+#
+# First run inserts canary@enclava.dev; every later run returns a
+# 23505 duplicate (unique constraint) — both count as healthy.
+# Any other outcome fails the workflow and GitHub emails the actor.
+#
+# Requires repo secrets (same ones the Pages build uses):
+#   VITE_LEADS_SUPABASE_URL
+#   VITE_LEADS_SUPABASE_ANON_KEY
+
+on:
+  schedule:
+    - cron: "23 4 * * *" # daily, off the hour to avoid GH cron congestion
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "leads-keepalive"
+  cancel-in-progress: false
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Canary insert into leads
+        run: |
+          set -euo pipefail
+          if [ -z "$URL" ] || [ -z "$KEY" ]; then
+            echo "::error::VITE_LEADS_SUPABASE_URL / VITE_LEADS_SUPABASE_ANON_KEY secrets are not set"
+            exit 1
+          fi
+          code=$(curl -sS --max-time 30 -o /tmp/body -w "%{http_code}" \
+            -X POST "$URL/rest/v1/leads" \
+            -H "apikey: $KEY" \
+            -H "Authorization: Bearer $KEY" \
+            -H "Content-Type: application/json" \
+            -H "Prefer: return=minimal" \
+            -d '{"site_id":"enclava","contact_type":"email","contact_value":"canary@enclava.dev","metadata":{"source":"keepalive-canary"}}')
+          echo "status=$code body=$(cat /tmp/body)"
+          # 201 = inserted, 23505 = already present → backend healthy
+          if [ "$code" = "201" ]; then
+            echo "canary inserted"
+          elif grep -q 23505 /tmp/body; then
+            echo "canary already present (duplicate) — backend healthy"
+          else
+            echo "::error::Leads backend unhealthy (see status/body above)"
+            exit 1
+          fi
+        env:
+          URL: ${{ secrets.VITE_LEADS_SUPABASE_URL }}
+          KEY: ${{ secrets.VITE_LEADS_SUPABASE_ANON_KEY }}
