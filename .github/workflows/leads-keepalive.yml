@@ -42,7 +42,7 @@ jobs:
             -H "Authorization: Bearer $KEY" \
             -H "Content-Type: application/json" \
             -H "Prefer: return=minimal" \
-            -d '{"site_id":"enclava","contact_type":"email","contact_value":"canary@enclava.dev","metadata":{"source":"keepalive-canary"}}')
+            -d '{"site_id":"enclava-dev","contact_type":"email","contact_value":"canary@enclava.dev","metadata":{"source":"keepalive-canary","site":"enclava-dev"}}')
           echo "status=$code body=$(cat /tmp/body)"
           # 201 = inserted, 23505 = already present → backend healthy
           if [ "$code" = "201" ]; then
