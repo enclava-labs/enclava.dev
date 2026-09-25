@@ -163,23 +163,21 @@ export default function Features() {
           </div>
 
           {/* Sticky terminal — pins beside steps on desktop, under the nav on mobile */}
-          <div className="sticky top-[86px] lg:top-[110px] z-30 order-first lg:order-none mb-4 lg:mb-0">
+          <div className="sticky top-[86px] lg:top-[110px] z-30 min-w-0 order-first lg:order-none mb-4 lg:mb-0">
             <div className="relative rounded-[18px] bg-[hsl(223,33%,7%)] border border-border shadow-[0_40px_90px_-20px_hsla(223,45%,3%,0.8),0_0_60px_-30px_hsla(190,90%,50%,0.35)] overflow-hidden">
-              {/* live badge */}
-              <div className="absolute -top-[15px] right-5 z-10 inline-flex items-center gap-2 px-[13px] py-1.5 rounded-full font-mono text-[10.5px] uppercase tracking-[0.16em] text-muted-foreground bg-card/95 border border-primary/30 shadow-lg backdrop-blur">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_10px_hsl(190,90%,45%)] animate-pulse" />
-                live deploy
-              </div>
-
               {/* window bar + progress dots */}
               <div className="flex items-center gap-2 px-[18px] py-3 border-b border-border bg-background/50">
-                <span className="w-[11px] h-[11px] rounded-full bg-muted" />
-                <span className="w-[11px] h-[11px] rounded-full bg-muted" />
-                <span className="w-[11px] h-[11px] rounded-full bg-muted" />
-                <span className="ml-3 font-mono text-xs text-muted-foreground/60">
+                <span className="w-[11px] h-[11px] shrink-0 rounded-full bg-muted" />
+                <span className="w-[11px] h-[11px] shrink-0 rounded-full bg-muted" />
+                <span className="w-[11px] h-[11px] shrink-0 rounded-full bg-muted" />
+                <span className="ml-3 hidden sm:block min-w-0 truncate font-mono text-xs text-muted-foreground/60">
                   enclava cli · ~/my-app
                 </span>
-                <span className="ml-auto flex gap-1.5">
+                <span className="ml-auto shrink-0 inline-flex items-center gap-2 px-[11px] py-1 rounded-full font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground bg-card/95 border border-primary/30">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_10px_hsl(190,90%,45%)] animate-pulse" />
+                  live deploy
+                </span>
+                <span className="ml-2 shrink-0 flex gap-1.5">
                   {STEPS.map((_, i) => (
                     <span
                       key={i}
