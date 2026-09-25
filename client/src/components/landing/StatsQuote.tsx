@@ -15,7 +15,7 @@ export default function StatsQuote() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-20 md:mb-24"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4"
         >
           {STATS.map((s) => (
             <div
@@ -31,30 +31,6 @@ export default function StatsQuote() {
             </div>
           ))}
         </motion.div>
-
-        <motion.blockquote
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto"
-        >
-          <p className="font-display text-[26px] md:text-[40px] font-semibold leading-[1.3] tracking-tight text-white">
-            "We deploy our internal AI copilot here.{" "}
-            <em className="not-italic text-primary">Legal stopped asking questions.</em>"
-          </p>
-          <footer className="mt-7 flex items-center justify-center gap-3.5">
-            <span className="w-11 h-11 rounded-full grid place-items-center font-mono text-[13px] border border-primary/40 bg-gradient-to-br from-primary/50 to-secondary/40">
-              AN
-            </span>
-            <span className="text-left text-sm">
-              <b className="block">Security Lead</b>
-              <span className="text-muted-foreground/70">
-                Series B AI company, early access
-              </span>
-            </span>
-          </footer>
-        </motion.blockquote>
       </div>
     </section>
   );

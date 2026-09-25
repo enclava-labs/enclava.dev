@@ -7,7 +7,6 @@ const cases = [
     title: "Private AI & inference",
     body: "Run LLMs, embedding pipelines, RAG stacks, agents, or fine-tuning jobs without your prompts, training data, or model weights ever being readable by the host.",
     tags: ["LLMs", "RAG", "agents", "fine-tuning"],
-    quote: "We deploy our internal copilot here. Legal stopped asking questions.",
     span: "lg:col-span-3",
     featured: true,
   },
@@ -146,11 +145,6 @@ export default function Products() {
                         {t}
                       </span>
                     ))}
-                  </div>
-                )}
-                {c.quote && (
-                  <div className="mt-6 pt-5 border-t border-white/[0.08] italic text-muted-foreground text-[13px]">
-                    "{c.quote}"
                   </div>
                 )}
               </div>

@@ -18,7 +18,6 @@ const sections = [
       "Agents that hold long-lived API keys",
       "Fine-tuning on proprietary datasets",
     ],
-    proof: "We deploy our internal copilot here. Legal stopped asking questions.",
   },
   {
     id: "regulated-saas",
@@ -152,11 +151,6 @@ export default function UseCases() {
                   <p className="text-muted-foreground text-[15px] leading-relaxed">
                     {s.body}
                   </p>
-                  {s.proof && (
-                    <div className="mt-6 pt-6 border-t border-border italic text-muted-foreground text-sm">
-                      "{s.proof}"
-                    </div>
-                  )}
                 </div>
                 <div className="lg:col-span-6 lg:col-start-7">
                   <div className="border border-border">
