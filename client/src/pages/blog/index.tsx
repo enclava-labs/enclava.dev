@@ -12,6 +12,7 @@ export default function BlogIndex() {
       <Navbar />
       <main className="pt-20">
         <section className="py-24 bg-background">
+          <h1 className="sr-only">Enclava.dev Blog</h1>
           <div className="container mx-auto px-6">
             {posts.length === 0 ? (
               <div className="text-center py-20 border border-white/10 bg-white/[0.02]">

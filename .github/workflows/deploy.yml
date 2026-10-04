@@ -43,8 +43,8 @@ jobs:
           VITE_LEADS_SUPABASE_URL: ${{ secrets.VITE_LEADS_SUPABASE_URL }}
           VITE_LEADS_SUPABASE_ANON_KEY: ${{ secrets.VITE_LEADS_SUPABASE_ANON_KEY }}
 
-      - name: Create 404.html for SPA routing
-        run: cp ./dist/public/index.html ./dist/public/404.html
+      - name: Check pre-rendered SEO output
+        run: pnpm run check:seo
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

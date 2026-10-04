@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -14,10 +14,14 @@ import Privacy from "@/pages/privacy";
 import Terms from "@/pages/terms";
 import NotFound from "@/pages/not-found";
 import { useEffect } from "react";
+import { getMeta } from "@/seo";
 
 function PageWrapper({ children }: { children: React.ReactNode }) {
+  const [location] = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
+    const meta = getMeta(location.replace(/\/$/, "") || "/");
+    if (meta) document.title = meta.title;
     if (window.plausible) {
       window.plausible('pageview');
     }
