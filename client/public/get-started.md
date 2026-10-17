@@ -4,7 +4,7 @@
 
 ## Hosted platform (invite-only early access)
 
-Request access to the managed confidential applications platform. Push a container, get a confidential application. CPU containers on AMD SEV-SNP only for now; payments in bitcoin only. Capacity is limited. Request access and we'll get back to you.
+Request access to the managed confidential applications platform. Push a container, get a confidential application. CPU containers on AMD SEV-SNP only for now. Capacity is limited. Request access and we'll get back to you.
 
 [Request access](https://enclava.dev/get-started)
 

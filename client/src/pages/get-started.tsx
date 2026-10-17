@@ -107,7 +107,7 @@ const paths = [
     title: "Deploy your first app",
     body: "Request access to the hosted platform. Push a container, get a confidential application running on a TLS endpoint. The fastest way to see what Enclava actually does.",
     bullets: [
-      "Invite-only early access, bitcoin payments only for now",
+      "Invite-only early access",
       "CPU containers on AMD SEV-SNP — bring any OCI image",
       "TLS, custom domains, encrypted volumes included",
       "Public attestation per deploy",
