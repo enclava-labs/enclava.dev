@@ -9,7 +9,7 @@ const capabilities = [
   {
     icon: Terminal,
     title: "Declarative deploys",
-    body: "Describe your app in one file: image, resources, volumes, domain. Push from your laptop or your CI. Same workflow whether you're shipping a web app, a database, or an inference server.",
+    body: "Describe your app in one file: image, resources, volumes, domain. Push from your laptop or your CI. Same workflow whether you're shipping a web app, a database, or a background worker.",
   },
   {
     icon: Lock,
@@ -124,7 +124,7 @@ export default function Platform() {
                   volumes — in one command.
                 </p>
                 <pre className="bg-background/60 backdrop-blur-sm border border-white/[0.06] rounded-md p-4 font-mono text-[12.5px] leading-7 text-white whitespace-pre-wrap mb-6">
-<span className="text-primary">$</span> brew install enclava
+<span className="text-primary">$</span> curl -fsSL https://raw.githubusercontent.com/enclava-labs/cap/main/scripts/install.sh | bash
 <span className="text-primary">$</span> enclava deploy myapp ghcr.io/me/app:latest
 <span className="text-secondary">▸ live at https://myapp.enclava.dev</span>
                 </pre>

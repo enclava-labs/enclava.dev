@@ -1,18 +1,14 @@
 import { motion } from "framer-motion";
 
 const WORKLOADS = [
-  "private LLM inference",
-  "RAG pipelines",
-  "regulated SaaS",
-  "encrypted Postgres",
-  "PII dashboards",
   "signing workers",
-  "multi-party clean rooms",
+  "wallet backends",
+  "encrypted Postgres",
+  "regulated SaaS",
+  "PII dashboards",
   "self-hosted, actually private",
-  "fine-tuning jobs",
-  "federated analytics",
-  "internal copilots",
   "agent workloads",
+  "confidential SSH machines",
 ];
 
 export default function LogoTicker() {
@@ -25,7 +21,7 @@ export default function LogoTicker() {
       className="pt-6 pb-2 overflow-hidden"
     >
       <div className="font-mono text-xs uppercase tracking-[0.22em] text-muted-foreground/60 text-center mb-8">
-        Workloads running on enclava today
+        Built for workloads like
       </div>
 
       <div

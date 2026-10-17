@@ -12,7 +12,7 @@ A product of [Enclava Labs](https://enclava-labs.com/). Sister product: [enclava
 ## Product
 
 - [Platform](/platform): Hosted PaaS and open-source CAP engine
-- [Use cases](/use-cases): Private AI, regulated SaaS, encrypted databases, and more
+- [Use cases](/use-cases): Agents, regulated SaaS, encrypted databases, and more
 - [Get started](/get-started.md): Request hosted access or self-host the engine
 
 ## Blog
