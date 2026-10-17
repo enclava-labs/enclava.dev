@@ -2,9 +2,9 @@
 
 > Two paths: request hosted access, or run the open-source engine yourself.
 
-## Hosted platform (invite beta)
+## Hosted platform (invite-only early access)
 
-Request access to the managed confidential applications platform. Push a container, get a confidential application. No card required; we onboard teams in waves.
+Request access to the managed confidential applications platform. Push a container, get a confidential application. CPU containers on AMD SEV-SNP only for now. Capacity is limited. Request access and we'll get back to you.
 
 [Request access](https://enclava.dev/get-started)
 

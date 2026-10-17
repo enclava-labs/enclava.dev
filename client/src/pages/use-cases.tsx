@@ -9,14 +9,13 @@ const sections = [
   {
     id: "private-ai",
     eyebrow: "Warm market · Featured",
-    title: "Private AI, inference & agents",
-    body: "Run LLMs, embedding pipelines, RAG stacks, agentic workflows, and fine-tuning jobs without your prompts, training data, or model weights ever being readable by the host. Same OpenAI-compatible APIs your team already uses, with cryptographic guarantees underneath.",
+    title: "Agents & key-holding workers",
+    body: "Run agents, bots and background workers that hold long-lived API keys, signing keys or user data, without any of it being readable by the host. Your agent stays an ordinary CPU container, with cryptographic guarantees underneath.",
     fits: [
-      "Internal copilots over private knowledge",
-      "Customer-facing AI where prompts are sensitive",
-      "Inference on regulated data (health, finance, legal)",
       "Agents that hold long-lived API keys",
-      "Fine-tuning on proprietary datasets",
+      "Bots and workers with signing keys",
+      "Wallet and payment backends",
+      "Tool servers that touch private data",
     ],
   },
   {

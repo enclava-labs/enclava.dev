@@ -58,7 +58,7 @@ const pages: Record<string, PageMeta> = {
   "/use-cases": {
     title: "Use Cases for Confidential Computing" + SUFFIX,
     description:
-      "Private AI, regulated SaaS, encrypted databases and more. If it's a Linux container, Enclava can run it confidentially inside a hardware TEE.",
+      "Agents, regulated SaaS, encrypted databases and more. If it's a Linux container, Enclava can run it confidentially inside a hardware TEE.",
   },
   "/services": {
     title: "Confidential Computing Services" + SUFFIX,

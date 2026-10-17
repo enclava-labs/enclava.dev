@@ -107,13 +107,13 @@ const paths = [
     title: "Deploy your first app",
     body: "Request access to the hosted platform. Push a container, get a confidential application running on a TLS endpoint. The fastest way to see what Enclava actually does.",
     bullets: [
-      "Invite-only beta, no card required",
-      "OCI containers — bring any image",
+      "Invite-only early access",
+      "CPU containers on AMD SEV-SNP — bring any OCI image",
       "TLS, custom domains, encrypted volumes included",
       "Public attestation per deploy",
     ],
     cta: <WaitlistForm source="get-started-deploy" />,
-    note: "We're onboarding teams in waves. You'll usually hear back within a day.",
+    note: "Capacity is limited. Request access and we'll get back to you.",
   },
   {
     icon: Cloud,
@@ -252,7 +252,7 @@ export default function GetStarted() {
               </h2>
               <ol className="space-y-4 border-l border-primary/30 pl-6">
                 {[
-                  "We send you credentials and a quickstart link.",
+                  "We get back to you with access and a quickstart link.",
                   "You install the CLI and run enclava deploy with any container.",
                   "Your app boots inside a TEE with TLS and a public URL.",
                   "You verify the attestation, share it with your team, ship.",
