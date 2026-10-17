@@ -6,7 +6,7 @@ Enclava.dev is a confidential applications platform from [Enclava Labs](https://
 
 ## Two ways in
 
-- **Hosted platform (invite-only early access).** Get an invite code, then deploy with the `enclava` CLI. CPU containers only for now; payments in bitcoin only. TLS, encrypted volumes, and public attestation per deploy.
+- **Hosted platform (invite-only early access).** Request access, then deploy with the `enclava` CLI. CPU containers only for now; payments in bitcoin only. TLS, encrypted volumes, and public attestation per deploy.
 - **Self-host the engine.** The control plane ([CAP](https://github.com/enclava-labs/cap)) is open source (MIT). Run it on your own SEV-SNP hardware.
 
 ## What you can run

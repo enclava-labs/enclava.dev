@@ -4,7 +4,7 @@
 
 ## Hosted platform (invite-only early access)
 
-Request an invite code for the managed confidential applications platform. Push a container, get a confidential application. CPU containers on AMD SEV-SNP only for now; payments in bitcoin only. Capacity is limited, so we send invite codes in small batches.
+Request access to the managed confidential applications platform. Push a container, get a confidential application. CPU containers on AMD SEV-SNP only for now; payments in bitcoin only. Capacity is limited. Request access and we'll get back to you.
 
 [Request access](https://enclava.dev/get-started)
 
