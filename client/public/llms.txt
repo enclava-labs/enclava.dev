@@ -9,6 +9,8 @@ A product of [Enclava Labs](https://enclava-labs.com/). Sister product: [enclava
 - [X](https://x.com/EnclavaLabs)
 - [LinkedIn](https://www.linkedin.com/company/enclava-labs/)
 
+Markdown for agents: send `Accept: text/markdown` on any page for its markdown version, or append `.md` to the URL.
+
 ## Product
 
 - [Platform](/platform): Hosted PaaS and open-source CAP engine

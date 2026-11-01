@@ -43,6 +43,29 @@ for (const [route, file] of Object.entries(routes)) {
   if (!html.includes('type="application/ld+json"')) fail(`${route}: no JSON-LD`);
   if (html.includes("maximum-scale")) fail(`${route}: viewport blocks zoom`);
   if (!html.includes('rel="icon"')) fail(`${route}: no favicon`);
+
+  // RFC 8288 agent discovery links (HTML equivalent of the Link response headers
+  // injected by the Cloudflare transform rule, see script/cloudflare-agent-readiness.mjs)
+  if (route === "/") {
+    if (!html.includes('<link rel="describedby" href="/llms.txt"'))
+      fail(`/: missing describedby agent-discovery link to /llms.txt`);
+    if (!html.includes('<link rel="service-doc" href="https://docs.enclava.dev/"'))
+      fail(`/: missing service-doc agent-discovery link to docs.enclava.dev`);
+  }
+
+  // Markdown for Agents: every page must have a prerendered .md twin so
+  // Accept: text/markdown negotiation (Express middleware + Cloudflare
+  // worker) never falls through to HTML.
+  const twin =
+    route === "/" ? "index.md" : route === "/blog" ? "blog/index.md" : `${route.slice(1)}.md`;
+  const twinPath = path.join(out, twin);
+  if (!existsSync(twinPath)) fail(`${route}: missing markdown twin ${twin}`);
+  else {
+    const md = readFileSync(twinPath, "utf8");
+    if (md.trim().length < 200) fail(`${route}: markdown twin ${twin} looks empty`);
+    if (!/^# /m.test(md) && !/^title:/m.test(md))
+      fail(`${route}: markdown twin ${twin} has no h1 or frontmatter title`);
+  }
 }
 
 const robots = path.join(out, "robots.txt");

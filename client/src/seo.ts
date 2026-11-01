@@ -123,6 +123,16 @@ export function renderHead(path: string, meta: PageMeta): string {
     `<title>${esc(meta.title)}</title>`,
     `<meta name="description" content="${esc(meta.description)}" />`,
     `<link rel="canonical" href="${url}" />`,
+    // RFC 8288 agent discovery on the homepage: HTML equivalent of the Link
+    // response headers (GitHub Pages can't set response headers on the live
+    // site; those are injected by the Cloudflare transform rule applied by
+    // script/cloudflare-agent-readiness.mjs).
+    ...(path === "/"
+      ? [
+          `<link rel="describedby" href="/llms.txt" />`,
+          `<link rel="service-doc" href="https://docs.enclava.dev/" />`,
+        ]
+      : []),
     `<meta property="og:title" content="${esc(meta.title)}" />`,
     `<meta property="og:description" content="${esc(meta.description)}" />`,
     `<meta property="og:type" content="${meta.type ?? "website"}" />`,

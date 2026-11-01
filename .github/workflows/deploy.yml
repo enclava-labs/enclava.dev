@@ -64,3 +64,36 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # Agent readiness (RFC 8288 Link headers + Markdown for Agents): GitHub
+  # Pages can't set response headers or negotiate content, so both are
+  # handled at the Cloudflare edge (transform rule + worker).
+  # Skipped until CLOUDFLARE_API_TOKEN is configured on the repo (token needs
+  # Account Settings:Read, Zone:Read, DNS:Edit, Rulesets:Edit,
+  # Workers Scripts:Edit, Workers Routes:Edit). Enable the orange cloud on
+  # the apex A/AAAA records once (script refuses while SSL mode is not
+  # Full/Strict).
+  agent-readiness:
+    name: Agent readiness (Link headers, markdown negotiation)
+    needs: deploy
+    runs-on: ubuntu-latest
+    env:
+      CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Checkout
+        if: ${{ env.CF_TOKEN != '' }}
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        if: ${{ env.CF_TOKEN != '' }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Apply Cloudflare agent readiness config
+        if: ${{ env.CF_TOKEN != '' }}
+        run: node script/cloudflare-agent-readiness.mjs
+
+      - name: Skipped (no CLOUDFLARE_API_TOKEN secret)
+        if: ${{ env.CF_TOKEN == '' }}
+        run: echo '::warning::CLOUDFLARE_API_TOKEN not set — skipping agent readiness (Link headers, markdown negotiation; see script/cloudflare-agent-readiness.mjs)'
