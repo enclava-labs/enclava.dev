@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight, Loader2, Check, Terminal, Cloud } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { submitLead } from "@/lib/supabase";
+import { submitLead } from "@/lib/leads";
 
 function WaitlistForm({ source }: { source: string }) {
   const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ function WaitlistForm({ source }: { source: string }) {
     setErrorMsg("");
     try {
       const result = await submitLead(email, source);
-      if (result.status === "ok" || result.status === "duplicate") {
+      if (result.status === "ok") {
         setStatus("success");
         setEmail("");
       } else {

@@ -1,14 +1,16 @@
 name: Leads keep-alive + canary
 
 # Supabase free-tier projects pause after ~7 days of inactivity.
-# This daily canary keeps the project awake AND verifies the exact
-# write path visitors use (RLS insert policy included).
+# enclava-dev and enclava-ai post leads to the Cloudflare leads-collector now;
+# this canary only keeps the shared Supabase project awake for the sites still
+# on it (autonomica, freedom-cash) and verifies its anon insert path (RLS
+# included). Delete it once those sites move too.
 #
 # First run inserts canary@enclava.dev; every later run returns a
 # 23505 duplicate (unique constraint) — both count as healthy.
 # Any other outcome fails the workflow and GitHub emails the actor.
 #
-# Requires repo secrets (same ones the Pages build uses):
+# Requires repo secrets (kept only for this canary):
 #   VITE_LEADS_SUPABASE_URL
 #   VITE_LEADS_SUPABASE_ANON_KEY
 

@@ -40,8 +40,7 @@ jobs:
         run: pnpm run build:client
         env:
           NODE_ENV: production
-          VITE_LEADS_SUPABASE_URL: ${{ secrets.VITE_LEADS_SUPABASE_URL }}
-          VITE_LEADS_SUPABASE_ANON_KEY: ${{ secrets.VITE_LEADS_SUPABASE_ANON_KEY }}
+          VITE_LEADS_ENDPOINT: ${{ secrets.VITE_LEADS_ENDPOINT }}
 
       - name: Check pre-rendered SEO output
         run: pnpm run check:seo
