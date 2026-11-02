@@ -1,10 +1,12 @@
 name: Leads keep-alive + canary
 
 # Supabase free-tier projects pause after ~7 days of inactivity.
-# enclava-dev and enclava-ai post leads to the Cloudflare leads-collector now;
-# this canary only keeps the shared Supabase project awake for the sites still
-# on it (autonomica, freedom-cash) and verifies its anon insert path (RLS
-# included). Delete it once those sites move too.
+# No site writes to the shared Supabase project any more: enclava-dev,
+# enclava-ai, autonomica and freedom-cash all post to the Cloudflare
+# leads-collector. This canary only keeps the project awake so its historical
+# leads stay exportable. Once they are imported (leads-collector
+# supabase-export.sql), delete this workflow, the two secrets below and the
+# Supabase project.
 #
 # First run inserts canary@enclava.dev; every later run returns a
 # 23505 duplicate (unique constraint) — both count as healthy.
