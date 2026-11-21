@@ -21,11 +21,11 @@ export default function BlogIndex() {
                 </p>
               </div>
             ) : (
-              <div className="grid gap-px bg-white/10 border border-white/10">
+              <div className="grid grid-cols-1 gap-px bg-white/10 border border-white/10">
                 {posts.map((post) => (
                   <Link key={post.slug} href={`/blog/${post.slug}`}>
-                    <article className="bg-background p-10 hover:bg-white/[0.02] transition-colors group cursor-pointer">
-                      <div className="flex items-center gap-3 mb-4">
+                    <article className="bg-background p-6 sm:p-10 hover:bg-white/[0.02] transition-colors group cursor-pointer">
+                      <div className="flex flex-wrap items-center gap-3 mb-4">
                         <Calendar className="w-4 h-4 text-muted-foreground" />
                         <time className="text-sm text-muted-foreground font-mono">
                           {new Date(post.date).toLocaleDateString("en-US", {
@@ -35,7 +35,7 @@ export default function BlogIndex() {
                           })}
                         </time>
                         {post.tags && post.tags.length > 0 && (
-                          <div className="flex gap-2 ml-4">
+                          <div className="flex flex-wrap gap-2 sm:ml-4">
                             {post.tags.map((tag) => (
                               <span
                                 key={tag}

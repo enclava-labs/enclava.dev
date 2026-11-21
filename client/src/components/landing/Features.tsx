@@ -74,6 +74,26 @@ function tokenClass(t: Token["t"]) {
   }
 }
 
+function PaneLines({ pane, animate }: { pane: Token[][]; animate: boolean }) {
+  return (
+    <>
+      {pane.map((tokens, li) => (
+        <span
+          key={li}
+          className={`block whitespace-pre ${animate ? "opacity-0 animate-line-in" : ""}`}
+          style={animate ? { animationDelay: `${0.05 + li * 0.09}s` } : undefined}
+        >
+          {tokens.map((tok, ti) => (
+            <span key={ti} className={tokenClass(tok.t)}>
+              {tok.text || "\u00A0"}
+            </span>
+          ))}
+        </span>
+      ))}
+    </>
+  );
+}
+
 export default function Features() {
   const [active, setActive] = useState(0);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -135,7 +155,7 @@ export default function Features() {
                 data-pane={i}
                 className={`py-7 md:py-8 border-t border-white/[0.07] transition-opacity duration-500 ${
                   i === 0 ? "border-t-0 pt-1" : ""
-                } ${active === i ? "opacity-100" : "opacity-40"}`}
+                } ${active === i ? "" : "lg:opacity-40"}`}
               >
                 <span className="block font-mono text-[11px] tracking-[0.22em] text-primary mb-4">
                   {step.num}
@@ -158,12 +178,16 @@ export default function Features() {
                     ))}
                   </div>
                 )}
+                {/* Mobile: terminal inline under each step */}
+                <div className="lg:hidden mt-6 rounded-[14px] bg-[hsl(223,33%,7%)] border border-border p-4 font-mono text-[11px] leading-[1.8] overflow-x-auto">
+                  <PaneLines pane={step.pane} animate={false} />
+                </div>
               </div>
             ))}
           </div>
 
-          {/* Sticky terminal — pins beside steps on desktop, under the nav on mobile */}
-          <div className="sticky top-[86px] lg:top-[110px] z-30 min-w-0 order-first lg:order-none mb-4 lg:mb-0">
+          {/* Sticky terminal — desktop only, pins beside steps */}
+          <div className="hidden lg:block sticky top-[110px] z-30 min-w-0">
             <div className="relative rounded-[18px] bg-[hsl(223,33%,7%)] border border-border shadow-[0_40px_90px_-20px_hsla(223,45%,3%,0.8),0_0_60px_-30px_hsla(190,90%,50%,0.35)] overflow-hidden">
               {/* window bar + progress dots */}
               <div className="flex items-center gap-2 px-[18px] py-3 border-b border-border bg-background/50">
@@ -195,21 +219,7 @@ export default function Features() {
               <div className="p-5 md:px-8 md:py-7 font-mono text-[11px] md:text-[13.5px] leading-[1.9] min-h-[190px] md:min-h-[320px] overflow-x-auto">
                 {STEPS.map((step, i) => (
                   <div key={i} className={active === i ? "block" : "hidden"}>
-                    {step.pane.map((tokens, li) => (
-                      <span
-                        key={li}
-                        className={`block whitespace-pre opacity-0 ${
-                          active === i ? "animate-line-in" : ""
-                        }`}
-                        style={{ animationDelay: `${0.05 + li * 0.09}s` }}
-                      >
-                        {tokens.map((tok, ti) => (
-                          <span key={ti} className={tokenClass(tok.t)}>
-                            {tok.text || "\u00A0"}
-                          </span>
-                        ))}
-                      </span>
-                    ))}
+                    <PaneLines pane={step.pane} animate={active === i} />
                   </div>
                 ))}
               </div>

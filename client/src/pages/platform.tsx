@@ -103,13 +103,13 @@ export default function Platform() {
             />
           </div>
           <div className="container mx-auto px-6 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5 }}
-                className="rounded-xl p-10 lg:p-12 bg-card/40 backdrop-blur-sm border border-white/[0.06] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.5)]"
+                className="rounded-xl p-6 sm:p-10 lg:p-12 bg-card/40 backdrop-blur-sm border border-white/[0.06] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.5)]"
               >
                 <span className="font-mono text-[10px] tracking-[0.2em] text-primary uppercase">
                   For developers
@@ -123,10 +123,10 @@ export default function Platform() {
                   hardware TEE with TLS, attested release, and encrypted
                   volumes — in one command.
                 </p>
-                <pre className="bg-background/60 backdrop-blur-sm border border-white/[0.06] rounded-md p-4 font-mono text-[12.5px] leading-7 text-white whitespace-pre-wrap mb-6">
-<span className="text-primary">$</span> curl -fsSL https://raw.githubusercontent.com/enclava-labs/cap/main/scripts/install.sh | bash
-<span className="text-primary">$</span> enclava deploy myapp ghcr.io/me/app:latest
-<span className="text-secondary">▸ live at https://myapp.enclava.dev</span>
+                <pre className="bg-background/60 backdrop-blur-sm border border-white/[0.06] rounded-md p-4 font-mono text-[12.5px] leading-7 text-white whitespace-pre-wrap break-all mb-6">
+                  <span className="block"><span className="text-primary">$</span> curl -fsSL https://raw.githubusercontent.com/enclava-labs/cap/main/scripts/install.sh | bash</span>
+                  <span className="block"><span className="text-primary">$</span> enclava deploy myapp ghcr.io/me/app:latest</span>
+                  <span className="block text-secondary">▸ live at https://myapp.enclava.dev</span>
                 </pre>
                 <Link href="/get-started">
                   <Button className="rounded-none font-mono bg-primary text-background hover:bg-primary/90 h-12 px-6">
@@ -140,7 +140,7 @@ export default function Platform() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: 0.08 }}
-                className="rounded-xl p-10 lg:p-12 bg-card/40 backdrop-blur-sm border border-white/[0.06] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.5)]"
+                className="rounded-xl p-6 sm:p-10 lg:p-12 bg-card/40 backdrop-blur-sm border border-white/[0.06] shadow-[0_20px_60px_-30px_rgba(0,0,0,0.5)]"
               >
                 <span className="font-mono text-[10px] tracking-[0.2em] text-primary uppercase">
                   For infrastructure providers
